@@ -23,18 +23,30 @@ public class TermNode implements INode {
 
     @Override
     public Object evaluate(Object[] args) throws Exception {
-        return null;
+        Double factorValue = (Double) factor.evaluate(args);
+        if(operator != null) {
+            switch((Character) operator.value()) {
+                case '*': factorValue *= (Double) termNode.evaluate(args);
+                    break;
+                case '/': factorValue /= (Double) termNode.evaluate(args);
+                    break;
+            }
+        }
+        return factorValue;
     }
 
     @Override
     public void buildString(StringBuilder builder, int tabs) {
         Parser.addTabs(builder, tabs);
-        builder.append("TERMNODE\n");
-        Parser.addTabs(builder, tabs);
+        builder.append("TERM_NODE\n");
         factor.buildString(builder, tabs + 1);
 
         if(operator != null) {
-
+            Parser.addTabs(builder, tabs + 1);
+            builder.append(operator);
+            builder.append("\n");
+            Parser.addTabs(builder, tabs - 1);
+            termNode.buildString(builder, tabs);
         }
     }
 

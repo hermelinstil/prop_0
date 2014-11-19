@@ -32,13 +32,27 @@ public class FactorNode implements INode {
 
     @Override
     public Object evaluate(Object[] args) throws Exception {
-        return null;
-        //kolla efter nullvärden
+        if(integer != null) {
+            return integer.value();
+        } else {
+            return expressionNode.evaluate(args);
+        }
     }
 
     @Override
     public void buildString(StringBuilder builder, int tabs) {
-        //kolla efter nullvärden
+        Parser.addTabs(builder, tabs);
+        builder.append("FACTOR_NODE\n");
+        Parser.addTabs(builder, tabs + 1);
+
+        if(integer != null) {
+            builder.append(integer);
+        } else {
+            builder.append(leftParen);
+            expressionNode.buildString(builder, tabs + 1);
+            builder.append(rightParen);
+        }
+        builder.append("\n");
     }
 
     @Override

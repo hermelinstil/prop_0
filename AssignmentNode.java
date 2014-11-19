@@ -7,7 +7,7 @@ public class AssignmentNode implements INode {
 
     private Lexeme identifier,
                    assignmentSign;
-    private ExpressionNode expression;
+    public ExpressionNode expression;
     private Lexeme semicolon;
 
     public AssignmentNode(Tokenizer tokenizer) throws ParserException, IOException, TokenizerException {
@@ -37,7 +37,10 @@ public class AssignmentNode implements INode {
 
     @Override
     public Object evaluate(Object[] args) throws Exception {
-        return null;
+        return identifier.value() + " "
+                + assignmentSign.value() + " " +
+                expression.evaluate(args)
+                + " " + semicolon.value();
     }
 
     @Override
@@ -48,7 +51,7 @@ public class AssignmentNode implements INode {
         builder.append("\n\t");
         builder.append(assignmentSign);
         builder.append("\n");
-        expression.buildString(builder, 2);
+        expression.buildString(builder, tabs + 1);
         builder.append("\n\t");
         builder.append(semicolon);
     }

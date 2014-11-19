@@ -24,18 +24,26 @@ public class ExpressionNode implements INode {
 
     @Override
     public Object evaluate(Object[] args) throws Exception {
-        return null;
+        Double termValue = (Double) term.evaluate(args);
+        if(operator != null) {
+            switch((Character) operator.value()) {
+                case '+': termValue += (Double) expressionNode.evaluate(args);
+                    break;
+                case '-': termValue -= (Double) expressionNode.evaluate(args);
+                    break;
+            }
+        }
+        return termValue;
     }
 
     @Override
     public void buildString(StringBuilder builder, int tabs) {
         Parser.addTabs(builder, tabs);
-        builder.append("ExpressionNode\n");
-        Parser.addTabs(builder, tabs);
-        term.buildString(builder, tabs);
+        builder.append("EXPRESSION_NODE\n");
+        term.buildString(builder, tabs + 1);
 
         if(operator != null) {
-            Parser.addTabs(builder, tabs);
+            Parser.addTabs(builder, tabs + 1);
             builder.append(operator);
             builder.append("\n");
             Parser.addTabs(builder, tabs);

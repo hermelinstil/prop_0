@@ -56,6 +56,7 @@ public class Tokenizer implements ITokenizer {
     public void moveNext() throws IOException, TokenizerException {
         //new builder for new lexeme
         StringBuilder builder = new StringBuilder();
+        Object value;
         Token token;
 
         //skip blank space
@@ -68,19 +69,22 @@ public class Tokenizer implements ITokenizer {
                 appendTo(builder);
             }
             token = Token.IDENT;
+            value = builder.toString().trim();
         } else if(Character.isDigit(scanner.current())) {
             while(Character.isDigit(scanner.current())) {
                 appendTo(builder);
             }
             token = Token.INT_LIT;
+            value = Double.parseDouble(builder.toString().trim());
         } else {
             token = lexicon.get(scanner.current());
             appendTo(builder);
+            value = builder.toString().charAt(0);
         }
 
-        String word = builder.toString().trim();
+        //String word = builder.toString().trim();
 
-        current = new Lexeme(word, token);
+        current = new Lexeme(value, token);
         //köra på lista istället?
         //list.add(current);
     }

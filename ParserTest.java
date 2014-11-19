@@ -24,7 +24,9 @@ public class ParserTest {
         INode node = parser.parse();
         StringBuilder builder = new StringBuilder();
         node.buildString(builder, 0);
-        System.out.println(builder.toString());
+
+        builder.append(node.evaluate(null));
+        System.out.println("\n" + builder.toString());
     }
 
     @Test
