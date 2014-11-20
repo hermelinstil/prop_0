@@ -46,8 +46,7 @@ public class ExpressionNode implements INode {
             Parser.addTabs(builder, tabs + 1);
             builder.append(operator);
             builder.append("\n");
-            Parser.addTabs(builder, tabs);
-            expressionNode.buildString(builder, tabs);
+            expressionNode.buildString(builder, tabs + 1);
         }
     }
 

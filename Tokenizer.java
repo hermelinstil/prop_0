@@ -82,7 +82,6 @@ public class Tokenizer implements ITokenizer {
             value = builder.toString().charAt(0);
         }
 
-        //String word = builder.toString().trim();
 
         current = new Lexeme(value, token);
         //köra på lista istället?

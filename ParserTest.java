@@ -25,6 +25,7 @@ public class ParserTest {
         StringBuilder builder = new StringBuilder();
         node.buildString(builder, 0);
 
+        builder.append("\n");
         builder.append(node.evaluate(null));
         System.out.println("\n" + builder.toString());
     }

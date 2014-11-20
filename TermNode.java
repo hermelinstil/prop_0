@@ -45,8 +45,7 @@ public class TermNode implements INode {
             Parser.addTabs(builder, tabs + 1);
             builder.append(operator);
             builder.append("\n");
-            Parser.addTabs(builder, tabs - 1);
-            termNode.buildString(builder, tabs);
+            termNode.buildString(builder, tabs + 1);
         }
     }
 

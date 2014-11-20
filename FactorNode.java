@@ -49,7 +49,9 @@ public class FactorNode implements INode {
             builder.append(integer);
         } else {
             builder.append(leftParen);
+            builder.append("\n");
             expressionNode.buildString(builder, tabs + 1);
+            Parser.addTabs(builder, tabs + 1);
             builder.append(rightParen);
         }
         builder.append("\n");
